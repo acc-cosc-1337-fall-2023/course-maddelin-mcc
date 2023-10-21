@@ -3,7 +3,14 @@
 #include<string>
 
 using std::cout; using std::cin; using std::string;
+/*
 
+1) Create a program that will play the TicTacToe game until the user opts to quit (outer loop).
+2) Start the game with X or O. Loop here while user doesn’t provide an X or O.
+3) Modify (inner loop) that iterates until a winner is determined to display the winner.
+4) After a winner is determined prompt user if they want to play another game.
+
+*/
 int main() 
 {
 	TicTacToe game;
@@ -12,8 +19,11 @@ int main()
 
 	do
 	{
-		cout<<"Enter first player: ";
-		cin>>first_player;
+		while(first_player != "X" && first_player != "O")
+		{
+			cout<<"Enter first player: ";
+			cin>>first_player;
+		}
 
 		game.start_game(first_player);
 
@@ -25,6 +35,7 @@ int main()
 			game.mark_board(position);
 			game.display_board();
 		}
+		cout<<"Game Over. Winner: "<<game.get_winner()<<"\n\n";
 		cout<<"Player again, enter Y or y? ";
 		cin>>user_choice;
 
