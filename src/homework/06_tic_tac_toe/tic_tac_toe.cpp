@@ -23,13 +23,10 @@ void TicTacToe::start_game(std::string first_player)
 {
     player = first_player;
     clear_board();
-
-
 }
 void TicTacToe::mark_board(int position){
     pegs[position-1] = player;
     set_next_player();
-
 }
 void TicTacToe::display_board() const 
 {
