@@ -2,8 +2,10 @@
 #include"tic_tac_toe_manager.h"
 #include<iostream>
 #include<string>
+#include<memory>
 
 using std::cout; using std::cin; using std::string;
+using std::unique_ptr; using std::make_unique;
 /*
 
 1) Create a program that will play the TicTacToe game until the user opts to quit (outer loop).
@@ -15,32 +17,38 @@ using std::cout; using std::cin; using std::string;
 int main() 
 {
 	TicTacToeManager mgr;
-	TicTacToe game;
+	unique_ptr<TicTacToe> game;
 	string first_player;
 	char user_choice = 'y';
 	int o, x, t;
+	int board_size;
 
 	do
 	{
+		//allow user to choose game size
+		cout<<"Choose Tic Tac Toe Game, enter 3 or 4: ";
+		cin>>board_size;
+		game = make_unique<TicTacToe>(board_size);
+
 		while(first_player != "X" && first_player != "O")
 		{
 			cout<<"Enter first player: ";
 			cin>>first_player;
 		}
 
-		game.start_game(first_player);
+		(*game).start_game(first_player);
 
 		int position;
-		while(!game.game_over())
+		while(!(*game).game_over())
 		{
 			cout<<"Enter a position: ";
 			cin>>position;
-			game.mark_board(position);
-			game.display_board();
+			(*game).mark_board(position);
+			display_board(*game);
 		}
 		mgr.save_game(game);
 		mgr.get_winner_total(o, x, t);
-		cout<<"Game Over. Winner: "<<game.get_winner()<<"\n\n";
+		cout<<"Game Over. Winner: "<<(*game).get_winner()<<"\n\n";
 		cout<<"X Wins: "<<x<<"\nO Wins: "<<o<<"\nTies: "<<t<<"\n\n";
 		cout<<"Enter Y or y to play again: ";
 		cin>>user_choice;
