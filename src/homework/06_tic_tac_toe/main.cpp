@@ -1,5 +1,7 @@
 #include"tic_tac_toe.h"
 #include"tic_tac_toe_manager.h"
+#include"tic_tac_toe_3.h"
+#include"tic_tac_toe_4.h"
 #include<iostream>
 #include<string>
 #include<memory>
@@ -28,7 +30,15 @@ int main()
 		//allow user to choose game size
 		cout<<"Choose Tic Tac Toe Game, enter 3 or 4: ";
 		cin>>board_size;
-		game = make_unique<TicTacToe>(board_size);
+		if (board_size == 3)
+		{
+			game = make_unique<TicTacToe3>();
+
+		}
+		else
+		{
+			game = make_unique<TicTacToe4>();
+		}
 
 		while(first_player != "X" && first_player != "O")
 		{
@@ -36,19 +46,19 @@ int main()
 			cin>>first_player;
 		}
 
-		(*game).start_game(first_player);
+		game->start_game(first_player);
 
 		int position;
-		while(!(*game).game_over())
+		while( game->game_over() == false )
 		{
 			cout<<"Enter a position: ";
 			cin>>position;
-			(*game).mark_board(position);
+			game->mark_board(position);
 			display_board(*game);
 		}
 		mgr.save_game(game);
-		mgr.get_winner_total(o, x, t);
-		cout<<"Game Over. Winner: "<<(*game).get_winner()<<"\n\n";
+		//mgr.get_winner_total(o, x, t);
+		cout<<"Game Over. Winner: "<<game->get_winner()<<"\n\n";
 		cout<<"X Wins: "<<x<<"\nO Wins: "<<o<<"\nTies: "<<t<<"\n\n";
 		cout<<"Enter Y or y to play again: ";
 		cin>>user_choice;

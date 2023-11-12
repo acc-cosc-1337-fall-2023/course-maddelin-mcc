@@ -37,7 +37,7 @@ bool TicTacToe4::check_row_win()
     //check for a horizontal win
     for(int i = 0; i < 4; i++)
     {
-        if( pegs[i*4] != " " && pegs[i*3]==pegs[i*4+1] && pegs[i*4]==pegs[i*4+2]&& pegs[i*4]==pegs[i*4+3])
+        if( pegs[i*4] != " " && pegs[i*4]==pegs[i*4+1] && pegs[i*4]==pegs[i*4+2]&& pegs[i*4]==pegs[i*4+3])
         {
             return true;
         }

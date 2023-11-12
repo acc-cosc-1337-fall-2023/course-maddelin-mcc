@@ -18,7 +18,7 @@ class TicTacToe
         std::string get_winner() const{return winner;};
     private:
         std::string player;
-        std::vector<std::string> pegs{9," "};
+        //std::vector<std::string> pegs;
         std::string winner;
         void clear_board();
         void set_next_player();
